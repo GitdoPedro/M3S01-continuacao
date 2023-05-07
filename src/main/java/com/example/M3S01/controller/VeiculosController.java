@@ -30,7 +30,7 @@ public class VeiculosController {
         Veiculo veiculo = modelMapper.map(request, Veiculo.class);
         veiculo = service.inserir(veiculo);
         VeiculoResponse resp = modelMapper.map(veiculo, VeiculoResponse.class);
-        return ResponseEntity.created(URI.create(resp.getId().toString())).body(resp);  // 201
+        return ResponseEntity.created(URI.create(veiculo.getPlaca())).body(resp);  // 201
     }
 
     @GetMapping
@@ -42,29 +42,24 @@ public class VeiculosController {
     }
 
     @GetMapping("{placa}")
-    public ResponseEntity<VeiculoResponse> consultar(@PathVariable("placa") Integer placa) {
-        Veiculo veiculo  = service.consultar(placa);
+    public ResponseEntity<VeiculoResponse> consultar(@PathVariable("placa") String placa) {
+        Veiculo veiculo  = service.consultarPorPlaca(placa);
         VeiculoResponse resp = modelMapper.map(veiculo, VeiculoResponse.class);
         return ResponseEntity.ok(resp);
     }
 
     @DeleteMapping("{placa}")
-    public ResponseEntity excluir(@PathVariable("placa") Integer placa) {
+    public ResponseEntity excluir(@PathVariable("placa") String placa) {
         service.excluir(placa);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{placa}/multas")
-    public ResponseEntity<VeiculoResponse> atualizarQtdMultas(@PathVariable String placa, @RequestBody @Valid VeiculoRequest request) {
-        Veiculo veiculoAtualizado = service.AcrescentaMultas(placa, request.getQtdMultas());
+    public ResponseEntity<VeiculoResponse> atualizarQtdMultas(@PathVariable String placa) {
+        Veiculo veiculoAtualizado = service.adicionarMulta(placa);
         VeiculoResponse resp = modelMapper.map(veiculoAtualizado, VeiculoResponse.class);
         return ResponseEntity.ok(resp);
     }
-
-
-
-
-
 
 
 

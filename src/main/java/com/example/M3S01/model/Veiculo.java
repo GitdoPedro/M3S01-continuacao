@@ -16,11 +16,17 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Veiculo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String placa;
     public String tipo;
     public String cor;
     public Integer anoDeFabricacao;
     public Integer qtdMultas;
 
+    public Veiculo(String placa, String tipo, String cor, Integer anoDeFabricacao) {
+        this.placa = placa;
+        this.tipo = tipo;
+        this.cor = cor;
+        this.anoDeFabricacao = anoDeFabricacao;
+        this.qtdMultas = 0;
+    }
 }
