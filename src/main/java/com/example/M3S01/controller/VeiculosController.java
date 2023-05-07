@@ -1,7 +1,10 @@
 package com.example.M3S01.controller;
 
 
+import com.example.M3S01.dto.VeiculoRequest;
+import com.example.M3S01.dto.VeiculoResponse;
 import com.example.M3S01.model.Veiculo;
+import com.example.M3S01.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
