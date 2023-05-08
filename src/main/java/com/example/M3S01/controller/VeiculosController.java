@@ -19,7 +19,7 @@ import java.util.List;
 @CrossOrigin
 public class VeiculosController {
 
-    @Autowired
+    @Autowired(required = false)
     private ModelMapper modelMapper;
 
     @Autowired
